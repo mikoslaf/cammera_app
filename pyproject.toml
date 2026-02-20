@@ -16,7 +16,7 @@ include = [
 
 [tool.poetry.dependencies]
 # MediaPipe zwykle nie wspiera świeżych wersji Pythona (np. 3.13), więc ograniczamy.
-python = ">=3.12"
+python = ">=3.12,<4.0"
 
 mediapipe = ">=0.10.31,<0.11"
 opencv-python = ">=4.11.0.0,<5.0.0"
