@@ -20,7 +20,7 @@ include = [
 
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.13"            # MediaPipe nie wspiera jeszcze 3.13
+python = ">=3.12,<4.0"            # MediaPipe nie wspiera jeszcze 3.13
 mediapipe = "0.10.31"
 opencv-python = "4.11.0.86"
 numpy = "2.4.1"
