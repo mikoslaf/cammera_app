@@ -1,6 +1,3 @@
-
-
-
 [tool.poetry]
 name = "gesture-tracker"
 version = "0.1.0"
@@ -9,45 +6,47 @@ authors = ["Your Name <you@example.com>"]
 license = "MIT"
 readme = "README.md"
 keywords = ["gesture", "mediapipe", "opencv", "computer-vision", "hand-tracking"]
-packages = [
-    { include = "gesture_tracker", from = "src" }
-]
+packages = [{ include = "gesture_tracker", from = "src" }]
 
-# To include extra files, add an 'include' key under [tool.poetry]
+# Dodatkowe pliki w paczce (np. modele / taski)
 include = [
-    "src/gesture_tracker/*.task"
+  { path = "src/gesture_tracker/*.task", format = "wheel" },
+  { path = "src/gesture_tracker/*.task", format = "sdist" }
 ]
-
 
 [tool.poetry.dependencies]
-python = ">=3.12,<4.0"            # MediaPipe nie wspiera jeszcze 3.13
-mediapipe = "0.10.31"
-opencv-python = "4.11.0.86"
-numpy = "2.4.1"
+# MediaPipe zwykle nie wspiera świeżych wersji Pythona (np. 3.13), więc ograniczamy.
+python = ">=3.12"
 
+mediapipe = ">=0.10.31,<0.11"
+opencv-python = ">=4.11.0.0,<5.0.0"
+numpy = ">=1.26,<3.0"
 
 [tool.poetry.scripts]
 gesture-demo = "gesture_tracker.demo:example_simple"
 gesture-tracker = "gesture_tracker.demo:example_manual_loop"
 
-
+[tool.poetry.group.dev.dependencies]
+black = "^25.0.0"
+ruff = "^0.9.0"
+mypy = "^1.8.0"
+pytest = "^8.0.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-
-
 [tool.black]
 line-length = 100
-target-version = ['py312']
-
+target-version = ["py312"]
 
 [tool.ruff]
 line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "W", "N"]
 ignore = ["E501"]
-
 
 [tool.mypy]
 python_version = "3.12"
@@ -55,7 +54,6 @@ strict = true
 warn_return_any = true
 warn_unused_ignores = true
 ignore_missing_imports = true
-
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
