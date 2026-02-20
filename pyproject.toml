@@ -1,0 +1,66 @@
+
+[tool.poetry]
+name = "gesture-tracker"
+version = "0.1.0"
+description = "Moduł do detekcji gestów dłoni, twarzy i pozy ciała za pomocą MediaPipe i OpenCV"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+keywords = ["gesture", "mediapipe", "opencv", "computer-vision", "hand-tracking"]
+packages = [
+    { include = "gesture_tracker" }
+]
+exclude = [
+    "old_main.py",
+    "*.task",
+    "**/__pycache__",
+    "**/*.pyc"
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"            # MediaPipe nie wspiera jeszcze 3.13
+mediapipe = "0.10.31"
+opencv-python = "4.11.0.86"
+numpy = "2.4.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+black = "^24.0"
+ruff = "^0.3.0"
+mypy = "^1.8"
+
+
+[tool.poetry.scripts]
+gesture-demo = "gesture_tracker.demo:example_simple"
+gesture-tracker = "gesture_tracker.demo:example_manual_loop"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "W", "N"]
+ignore = ["E501"]
+
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
