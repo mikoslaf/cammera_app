@@ -1,4 +1,6 @@
 
+
+
 [tool.poetry]
 name = "gesture-tracker"
 version = "0.1.0"
@@ -8,13 +10,12 @@ license = "MIT"
 readme = "README.md"
 keywords = ["gesture", "mediapipe", "opencv", "computer-vision", "hand-tracking"]
 packages = [
-    { include = "gesture_tracker" }
+    { include = "gesture_tracker", from = "src" }
 ]
-exclude = [
-    "old_main.py",
-    "*.task",
-    "**/__pycache__",
-    "**/*.pyc"
+
+# To include extra files, add an 'include' key under [tool.poetry]
+include = [
+    "src/gesture_tracker/*.task"
 ]
 
 
@@ -25,21 +26,16 @@ opencv-python = "4.11.0.86"
 numpy = "2.4.1"
 
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.0"
-black = "^24.0"
-ruff = "^0.3.0"
-mypy = "^1.8"
-
-
 [tool.poetry.scripts]
 gesture-demo = "gesture_tracker.demo:example_simple"
 gesture-tracker = "gesture_tracker.demo:example_manual_loop"
 
 
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
 
 
 [tool.black]
